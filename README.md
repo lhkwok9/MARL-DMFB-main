@@ -11,6 +11,7 @@ A cooperative multi-agent reinforcement learning framework for droplet routing f
     - make to-do list
     - try env.render
     - add line 200-211 in dmfb.py
+    - hardcode the dimension of the model for fov=5 for RCNN model
 
 ## To-do list
 - [x] animate the environment

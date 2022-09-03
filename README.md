@@ -1,6 +1,17 @@
 # MARL-DMFB
 A cooperative multi-agent reinforcement learning framework for droplet routing for droplet routing in DMFB
 
+## Log 
+- 03/09
+    - upload code
+    - make to do list
+
+## To do list
+- [ ] animate the environment
+- [ ] use keyboard to control the droplet
+- [ ] spawn droplets at the edge of the chip
+- [ ] implement CRNN_Attention
+
 ## Train model
 python main.py --chip_size=10 --drop_num=4 
 

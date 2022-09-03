@@ -2,14 +2,19 @@
 A cooperative multi-agent reinforcement learning framework for droplet routing for droplet routing in DMFB
 
 ## Log 
-- 03/09
-    - upload code
-    - make to do list
+- Aug 29
+    - scan through and understand the code
+    - trial run
 
-## To do list
-- [ ] animate the environment
-- [ ] use keyboard to control the droplet
-- [ ] spawn droplets at the edge of the chip
+- Sept 3
+    - upload code
+    - make to-do list
+    - try env.render
+    - add line 200-211 in dmfb.py
+
+## To-do list
+- [x] animate the environment
+- [x] spawn droplets at the edge of the chip
 - [ ] implement CRNN_Attention
 
 ## Train model

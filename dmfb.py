@@ -197,6 +197,18 @@ class RoutingTaskManager:
         def randomXY(w, l, n):
             x = np.random.randint(0, l, size=(n*2, 1))
             y = np.random.randint(0, w, size=(n*2, 1))
+            # droplets generated on the edge
+            # 0:Bottom 1:R 2:Top 3:L
+            spawn_dir = np.random.randint(0, 4, size=(n, 1))
+            for i, value in enumerate(spawn_dir):
+                if value == 0:
+                    y[i] = 0
+                elif value == 1:
+                    x[i] = l-1
+                elif value == 2:
+                    y[i] = w-1
+                else:
+                    x[i] = 0
             Start_End = np.hstack((x, y))
             return Start_End
         Start_End = randomXY(self.width, self.length, self.n_droplets)

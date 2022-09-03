@@ -62,7 +62,7 @@ def get_common_args():
 # arguments of vnd、 qmix
 def get_mixer_args(args):
     # network
-    args.rnn_hidden_dim = 128
+    args.rnn_hidden_dim = 42 # fov9: 128
     args.qmix_hidden_dim = 32
     args.two_hyper_layers = True
     args.hyper_hidden_dim = 32

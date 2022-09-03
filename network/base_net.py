@@ -30,25 +30,27 @@ class CRNN(nn.Module):
         self.conv2 = nn.Conv2d(32, 32, kernel_size=3, stride=1)
       # self.bn2 = nn.BatchNorm2d(32)
         self.mlp1 = nn.Linear(2+args.n_agents+args.n_actions, 10)
-        self.rnn = nn.GRUCell(5*5*32+10, args.rnn_hidden_dim)
+        self.rnn = nn.GRUCell(1*1*32+10, args.rnn_hidden_dim) # fov9: (5*5*32+10) fov5: (batch,32+10)
         self.fc1 = nn.Linear(args.rnn_hidden_dim, args.n_actions)
 
     def forward(self, inputs, hidden_state):
         pixel, vec = torch.split(
-            inputs, [9*9*4, self.args.n_agents+self.args.n_actions+2], dim=1)
-        pixel = pixel.reshape((-1, 4, 9, 9))
+            inputs, [self.args.fov*self.args.fov*4, self.args.n_agents+self.args.n_actions+2], dim=1)
+        pixel = pixel.reshape((-1, 4, self.args.fov, self.args.fov))
         pixel = f.relu(self.conv1(pixel))
         pixel = f.relu(self.conv2(pixel))
-        pixel = pixel.reshape((-1, 5*5*32))  # (batch,800)
+        pixel = pixel.reshape((-1, 1*1*32))  # fov9: (batch,800) fov5: (batch,32)
         vec = f.relu(self.mlp1(vec))  # (batch,10)
-        x = torch.cat([pixel, vec], dim=1)  # (batch,810)
+        x = torch.cat([pixel, vec], dim=1)  # fov9: (batch,810) fov5: (batch,42)
         h_in = hidden_state.reshape(-1, self.args.rnn_hidden_dim)
         h = self.rnn(x, h_in)
         q = self.fc1(h)
         return q, h
 
 class CRNN_Attention(nn.Module):
-    def __init__(self):
+    def __init__(self, args):
+        super(CRNN_Attention, self).__init__()
+        self.args = args
         return
     
     def forward(self):

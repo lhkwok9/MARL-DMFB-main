@@ -23,6 +23,9 @@ class VDN:
         elif args.net == 'crnn':
             self.eval_rnn = CRNN(args)  # 每个agent选动作的网络
             self.target_rnn = CRNN(args)
+        elif args.net == 'crnn_attention':
+            self.eval_rnn = CRNN_Attention(args)  # 每个agent选动作的网络
+            self.target_rnn = CRNN_Attention(args)
         self.eval_vdn_net = VDNNet()  # 把agentsQ值加起来的网络
         self.target_vdn_net = VDNNet()
         self.args = args

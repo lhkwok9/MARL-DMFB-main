@@ -35,7 +35,7 @@ class VDN:
             self.eval_vdn_net.cuda()
             self.target_vdn_net.cuda()
 
-        self.model_dir = args.model_dir + '/' + args.alg + '/' + '{}by{}-{}d{}b'.format(
+        self.model_dir = args.model_dir + '/' + args.alg + '/' + args.net + '/' + '{}by{}-{}d{}b'.format(
             self.args.chip_size, self.args.chip_size, self.args.drop_num, self.args.block_num)+'/'
         # 如果存在模型则加载模型
         if self.args.load_model:

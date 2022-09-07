@@ -89,6 +89,8 @@ class Runner:
             episode_steps += total_step  # 计算所有的步长
             episode_constraints += total_constraints
             total_success += success
+
+        print(f"avg. rewards={episode_rewards / self.args.evaluate_epoch}, avg. steps={episode_steps / self.args.evaluate_epoch}, success rate={total_success / self.args.evaluate_epoch*100}%")
         return episode_rewards / self.args.evaluate_epoch, episode_steps / self.args.evaluate_epoch, episode_constraints / self.args.evaluate_epoch, total_success / self.args.evaluate_epoch
 
     def plt(self, num):
@@ -116,7 +118,7 @@ class Runner:
                     format='png', dpi=400)
 
     def train_data_save(self, num):
-        prefix = '/{}/{}'.format(self.args.alg, self.args.net) + '_env({},{},{},{},{},{})'.format(
+        prefix = '/{}'.format(self.args.alg) + '_env({},{},{},{},{},{})'.format(
             self.args.chip_size, self.args.chip_size, self.args.drop_num, self.args.block_num, self.args.fov, self.args.stall)
         np.save(self.save_path + prefix +
                 'Rewards_{}'.format(num), self.episode_rewards)

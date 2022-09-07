@@ -1,7 +1,6 @@
 import torch
 import os
-from network.base_net import RNN
-from network.base_net import CRNN
+from network.base_net import RNN, CRNN, CRNN_Attention
 from network.vdn_net import VDNNet
 
 

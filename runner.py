@@ -21,7 +21,7 @@ class Runner:
         self.episode_constraints = []
         self.success_rate = []
         # 用来保存plt和pkl
-        self.save_path = self.args.result_dir + '/' + args.alg + '/' + '{}by{}-{}d{}b'.format(
+        self.save_path = self.args.result_dir + '/' + args.alg + '/' + args.net + '/' + '{}by{}-{}d{}b'.format(
             self.args.chip_size, self.args.chip_size, self.args.drop_num, self.args.block_num)
         if not os.path.exists(self.save_path):
             os.makedirs(self.save_path)

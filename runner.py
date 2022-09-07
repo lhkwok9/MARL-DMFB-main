@@ -116,7 +116,7 @@ class Runner:
                     format='png', dpi=400)
 
     def train_data_save(self, num):
-        prefix = '/{}'.format(self.args.alg) + '_env({},{},{},{},{},{})'.format(
+        prefix = '/{}/{}'.format(self.args.alg, self.args.net) + '_env({},{},{},{},{},{})'.format(
             self.args.chip_size, self.args.chip_size, self.args.drop_num, self.args.block_num, self.args.fov, self.args.stall)
         np.save(self.save_path + prefix +
                 'Rewards_{}'.format(num), self.episode_rewards)

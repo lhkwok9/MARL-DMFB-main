@@ -50,7 +50,7 @@ class CRNN(nn.Module):
 class CRNN_Attention(nn.Module):
     def __init__(self, args):
         # design for fov=5
-        super(CRNN, self).__init__()
+        super(CRNN_Attention, self).__init__()
         self.args = args
         self.conv1 = nn.Conv2d(4, 32, kernel_size=3, stride=1)
       # self.bn1 = nn.BatchNorm2d(32)
@@ -76,8 +76,8 @@ class CRNN_Attention(nn.Module):
         h = self.rnn(x, h_in)
 
         # attention code
-        weight = f.softmax(self.attention_fc(h))
-        att = torch.bmm(h, weight.transpose(1, 2))
+        weight = f.softmax(self.attention_fc(h), dim=1)
+        att = torch.matmul(h, torch.diag(weight[0]))*42
 
         q = self.fc1(att)
         return q, h

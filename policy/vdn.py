@@ -1,6 +1,6 @@
 import torch
 import os
-from network.base_net import RNN, CRNN, CRNN_Attention
+from network.base_net import RNN, CRNN_5, CRNN_9, CRNN_Attention
 from network.vdn_net import VDNNet
 
 
@@ -20,9 +20,12 @@ class VDN:
         if args.net == 'rnn':
             self.eval_rnn = RNN(input_shape, args)  # 每个agent选动作的网络
             self.target_rnn = RNN(input_shape, args)
-        elif args.net == 'crnn':
-            self.eval_rnn = CRNN(args)  # 每个agent选动作的网络
-            self.target_rnn = CRNN(args)
+        elif args.net == 'crnn_5':
+            self.eval_rnn = CRNN_5(args)  # 每个agent选动作的网络
+            self.target_rnn = CRNN_5(args)
+        elif args.net == 'crnn_9':
+            self.eval_rnn = CRNN_9(args)  # 每个agent选动作的网络
+            self.target_rnn = CRNN_9(args)
         elif args.net == 'crnn_attention':
             self.eval_rnn = CRNN_Attention(args)  # 每个agent选动作的网络
             self.target_rnn = CRNN_Attention(args)

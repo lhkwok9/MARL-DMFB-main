@@ -27,11 +27,19 @@ A cooperative multi-agent reinforcement learning framework for droplet routing f
         - suspect 2. the need to increase the max step allowed
             - because all droplets starts at the edge
 
+- Sept 9
+    - improve cnn code for foc=5 by 
+        - adding padding=1 (~80% success rate)
+        - kernel size=2 (~85% success rate)
+        - kernal size=2 and 64 output for conv2 (<85% success rate)
+        - kernel size=2 and add a fc2 layer (<85% success rate)
+        - using inception-like model and kernel size=3 (<85% success rate)
+        - using inception-like model and kernel size=2
+
 ## To-do list
 - [x] animate the environment
 - [x] spawn droplets at the edge of the chip
 - [ ] fov=5
-- [ ] implement CRNN_Attention
 
 ## Train model
 python main.py --chip_size=10 --drop_num=4 

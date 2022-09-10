@@ -34,7 +34,11 @@ A cooperative multi-agent reinforcement learning framework for droplet routing f
         - kernal size=2 and 64 output for conv2 (<85% success rate)
         - kernel size=2 and add a fc2 layer (<85% success rate)
         - using inception-like model and kernel size=3 (<85% success rate)
-        - using inception-like model and kernel size=2 (<80% success rate)
+        - using inception-like model and kernel size=2 (~80% success rate)
+    - can try 
+        - add one layer before rnn cuz too much node
+        - use attention layer before rnn layer
+
 
 ## To-do list
 - [x] animate the environment

@@ -52,7 +52,7 @@ def get_common_args():
                         help='the number of droplet')
     parser.add_argument('--block_num', type=int, default=0,
                         help='the number of block')
-    parser.add_argument('--net', type=str, default='crnn',
+    parser.add_argument('--net', type=str, default='crnn_9',
                         help='the architecture of policy')
     parser.add_argument('--fov', type=int, default=9, help='the fov value')
     args = parser.parse_args()
@@ -62,7 +62,7 @@ def get_common_args():
 # arguments of vnd、 qmix
 def get_mixer_args(args):
     # network
-    args.rnn_hidden_dim = 42 # fov9: 128
+    args.rnn_hidden_dim = 128 # fov9: 128
     args.qmix_hidden_dim = 32
     args.two_hyper_layers = True
     args.hyper_hidden_dim = 32

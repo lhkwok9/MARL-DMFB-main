@@ -27,28 +27,53 @@ A cooperative multi-agent reinforcement learning framework for droplet routing f
         - suspect 2. the need to increase the max step allowed
             - because all droplets starts at the edge
 
+- Sept 9
+    - aim: attain similar performance for fov5 compared with fov9 (~95%)
+    - improve cnn code for fov=5 by 
+        - adding padding=1 (~80% success rate)
+        - kernel size=2 (~85% success rate)
+        - kernal size=2 and 64 output for conv2 (<85% success rate)
+        - kernel size=2 and add a fc2 layer (<85% success rate)
+        - using attention:
+        - use attention layer before rnn layer
+        - using Inception:
+        - using inception-like model and kernel size=3 (<85% success rate)
+        - using inception-like model and kernel size=2 (~80% success rate)
+        - add one layer before rnn for inception cuz too much node (<80%)
+        - remove path one from inception (<85%)
+        - widen the cnn by including (1,5) and (5,1) kernel size (~85%)
+
+- Sept 12
+    - increase the rnn_hidden_dim back to 128
+    - improve cnn code for fov=5 by
+        - widen the cnn by including (1,5) and (5,1) kernel size + 3 layer kernel size=2 (~88%)
+    - cmd:
+        - python main.py --n_steps=2500000 --chip_size=10 --drop_num=3 --net=crnn_inception --fov=5
+        - python main.py --n_steps=2500000 --chip_size=10 --drop_num=3 --net=crnn_inception --fov=5 --load_model --load_model_name=0_ --evaluate
+        
+
+
 ## To-do list
-- [x] animate the environment
+- [x] shoe the droplets environment
 - [x] spawn droplets at the edge of the chip
 - [ ] fov=5
-- [ ] implement CRNN_Attention
 
 ## Train model
 python main.py --chip_size=10 --drop_num=4 
 
-training data will be saved in "TrainResult/vdn/10by10-4d0b/"
+training data will be saved in "TrainResult/vdn/crnn_9/10by10-4d0b/"
 
-trained model will be saved in "model/vdn/10by10-4d0b/"
+trained model will be saved in "model/vdn/crnn_9/10by10-4d0b/"
 
 ## Evaluate model in health mode
 python main.py --evaluate --load_model --chip_size=50 --drop_num=4 --evaluate_epoch=100
 
-This will evaluate the performance of the model: "model/vdn/50by50-4d0b/rnn_net_params.pkl" and "model/vdn/50by50-4d0b/vdn_net_params.pkl"
+This will evaluate the performance of the model: "model/vdn/crnn_9/50by50-4d0b/rnn_net_params.pkl" and "model/vdn/crnn_9/50by50-4d0b/vdn_net_params.pkl"
 
 ## Evaluate model with electrodes degrade
 python evaDegre.py --chip_size=10 --drop_num=4 --evaluate_epoch=40
 
-This will evaluate the performance of the model: "model/vdn/10by10-4d0b/rnn_net_params.pkl" and "model/vdn/10by10-4d0b/vdn_net_params.pkl"
+This will evaluate the performance of the model: "model/vdn/crnn_9/10by10-4d0b/rnn_net_params.pkl" and "model/vdn/crnn_9/10by10-4d0b/vdn_net_params.pkl"
 
 The data will be saved in "DgreData/10by10-4d0b"
 

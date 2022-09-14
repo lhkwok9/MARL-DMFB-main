@@ -25,7 +25,7 @@ A cooperative multi-agent reinforcement learning framework for droplet routing f
             - because too few data is provided to make dicision
             - tried chip_size=10, droplet=3: not being able to duplicate the paper result
         - suspect 2. the need to increase the max step allowed
-            - because all droplets starts at the edge
+            - because all droplets starts at the edge 
 
 - Sept 9
     - aim: attain similar performance for fov5 compared with fov9 (~95%)

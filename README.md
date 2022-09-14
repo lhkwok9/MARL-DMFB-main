@@ -46,10 +46,10 @@ A cooperative multi-agent reinforcement learning framework for droplet routing f
 - Sept 12
     - increase the rnn_hidden_dim back to 128
     - improve cnn code for fov=5 by
-        - widen the cnn by including (1,5) and (5,1) kernel size + 3 layer kernel size=2 (~88%)
+        - widen the cnn by including (1,5) and (5,1) kernel size + 3 layer kernel size=2 (~86%)
     - cmd:
         - python main.py --n_steps=2500000 --chip_size=10 --drop_num=3 --net=crnn_inception --fov=5
-        - python main.py --n_steps=2500000 --chip_size=10 --drop_num=3 --net=crnn_inception --fov=5 --load_model --load_model_name=0_ --evaluate
+        - python main.py --n_steps=2500000 --chip_size=10 --drop_num=3 --net=crnn_inception --fov=5 --load_model --load_model_name=0_ --evaluate --evaluate_epoch=1000
         
 
 

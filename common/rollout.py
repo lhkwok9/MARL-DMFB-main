@@ -25,7 +25,7 @@ class RolloutWorker:
         self.env.reset()
         if self.args.show:
             self.env.render()
-            time.sleep(0.05)
+            time.sleep(0.02)
         terminated = False
         step = 0
         constraints = 0

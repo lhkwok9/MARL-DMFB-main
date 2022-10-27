@@ -48,13 +48,21 @@ A cooperative multi-agent reinforcement learning framework for droplet routing f
     - improve cnn code for fov=5 by
         - widen the cnn by including (1,5) and (5,1) kernel size + 3 layer kernel size=2 (~86%)
     - cmd:
+        - training
         - python main.py --n_steps=2500000 --chip_size=10 --drop_num=3 --net=crnn_inception --fov=5
+        - continue training
+        - python main.py --n_steps=10000000 --chip_size=10 --drop_num=7 --net=crnn_5 --fov=5 --load_model --load_model_name=0_ 
+        - evaluating
         - python main.py --n_steps=2500000 --chip_size=10 --drop_num=3 --net=crnn_inception --fov=5 --load_model --load_model_name=0_ --evaluate --evaluate_epoch=1000
+
+- Oct 27
+    - drop_num=7, success rate ~ 15%
+        - with show=True, the result does not look bad, need to investigate the fail reasons
         
 
 
 ## To-do list
-- [x] shoe the droplets environment
+- [x] show the droplets environment
 - [x] spawn droplets at the edge of the chip
 - [ ] fov=5
 

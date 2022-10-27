@@ -3,7 +3,6 @@ import torch
 from torch.distributions import one_hot_categorical
 import time
 
-
 class RolloutWorker:
     def __init__(self, env, agents, args):
         self.env = env

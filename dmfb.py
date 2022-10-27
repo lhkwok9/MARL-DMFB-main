@@ -194,6 +194,7 @@ class RoutingTaskManager:
         return H+H.T-2*G
 
     def _Generate_Start_End(self):
+        count = 0
         def randomXY(w, l, n):
             x = np.random.randint(0, l, size=(n*2, 1))
             y = np.random.randint(0, w, size=(n*2, 1))
@@ -219,11 +220,13 @@ class RoutingTaskManager:
         out = strided(dis.ravel()[1:], shape=(m-1, m),
                       strides=(s0+s1, s1)).reshape(m, -1)
         while out.min() <= 2:
+            count = count + 1
             Start_End = randomXY(self.width, self.length, self.n_droplets)
             dis = self.compute_norm_squared_EDM(Start_End)
             s0, s1 = dis.strides
             out = strided(dis.ravel()[1:], shape=(
                 m-1, m), strides=(s0+s1, s1)).reshape(m, -1)
+        print(f"{count=}")
         return Start_End
 
     def GenRandomBlocks(self):
@@ -402,6 +405,7 @@ class RoutingTaskManager:
         '''
         fov = self.fov  # 正方形fov边长
         obs_i = np.zeros((4, fov, fov))
+        # obs_i = np.zeros((4, self.width, self.length))
         center_x, center_y = self.droplets[agent_i].x, self.droplets[agent_i].y
         tar_x, tar_y = self.droplets[agent_i].des_x, self.droplets[agent_i].des_y
         origin = (center_x-fov//2, center_y-fov//2)
@@ -410,12 +414,14 @@ class RoutingTaskManager:
             x, y = d.x-origin[0], d.y-origin[1]
             if (0 <= x < fov) and (0 <= y < fov):
                 obs_i[0][y][x] = idx+1
+            # obs_i[0][d.y][d.x] = idx+1
         # get current droplet's goal layer 1
         # # 投影过来 （50 for 4 drop)
         if self.n_droplets < 10:
             x = np.clip(self.droplets[agent_i].des_x - origin[0], 0, fov-1)
             y = np.clip(self.droplets[agent_i].des_y - origin[1], 0, fov-1)
             obs_i[1][y][x] = agent_i+1
+            # obs_i[1][self.droplets[agent_i].des_y][self.droplets[agent_i].des_x] = agent_i+1
         ######
         # 不投影 (10 drop)
         else:
@@ -423,6 +429,7 @@ class RoutingTaskManager:
             y = self.droplets[agent_i].des_y - origin[1]
             if (0 <= x < fov) and (0 <= y < fov):
                 obs_i[1][y][x] = agent_i+1
+            # obs_i[1][self.droplets[agent_i].des_y][self.droplets[agent_i].des_x] = agent_i+1
         ###333333
         # get other's Goal layer 2
         for idx, d in enumerate(self.droplets):
@@ -430,6 +437,7 @@ class RoutingTaskManager:
                 x = np.clip(d.des_x-origin[0], 0, fov-1)
                 y = np.clip(d.des_y-origin[1], 0, fov-1)
                 obs_i[2][y][x] = idx+1
+            # obs_i[2][d.des_y][d.des_x] = idx+1
         # get blocks layer 3
         for block in self.blocks:
             for i in range(block.x_min, block.x_max+1):
@@ -450,6 +458,7 @@ class RoutingTaskManager:
         elif downbound > 0:
             obs_i[3, -downbound:, :] = 1
         dir = np.array([(tar_x-center_x)/self.length, (tar_y-center_y)/self.width])
+        # dir = np.array([tar_x, center_x, self.length, tar_y, center_y, self.width])
         obs_i = np.append(obs_i, dir)
         return obs_i
 
@@ -596,7 +605,7 @@ class DMFBenv(ParallelEnv):
             index = agent
         return self.routing_manager.getOneObs(index)
 
-    def getObs(self):  # partitial observertion for all droplets
+    def getObs(self):  # partitial observation for all droplets
         observations = {}
         for i, agent in enumerate(self.agents):
             observations[agent] = self.routing_manager.getOneObs(i)

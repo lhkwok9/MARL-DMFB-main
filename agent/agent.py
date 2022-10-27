@@ -2,10 +2,10 @@ import numpy as np
 import torch
 from torch.distributions import Categorical
 
-
 # Agent no communication
 class Agents:
     def __init__(self, args):
+        print('Init agent')
         self.n_actions = args.n_actions
         self.n_agents = args.n_agents
         self.obs_shape = args.obs_shape

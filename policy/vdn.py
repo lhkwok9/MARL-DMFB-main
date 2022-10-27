@@ -196,7 +196,7 @@ class VDN:
 
     def init_hidden(self, episode_num):
         # 为每个episode中的每个agent都初始化一个eval_hidden、target_hidden
-        self. eval_hidden = torch.zeros(
+        self.eval_hidden = torch.zeros(
             (episode_num, self.n_agents, self.args.rnn_hidden_dim))
         self.target_hidden = torch.zeros(
             (episode_num, self.n_agents, self.args.rnn_hidden_dim))

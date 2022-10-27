@@ -31,7 +31,7 @@ class QMIX:
             self.target_rnn.cuda()
             self.eval_qmix_net.cuda()
             self.target_qmix_net.cuda()
-        self.model_dir = args.model_dir + '/' + args.alg + '/' + '{}by{}-{}d{}b'.format(
+        self.model_dir = args.model_dir + '/' + args.alg + '/' + args.net + '/' + '{}by{}-{}d{}b'.format(
             self.args.chip_size, self.args.chip_size, self.args.drop_num, self.args.block_num) + '/'
         # 如果存在模型则加载模型
         if self.args.load_model:
@@ -201,8 +201,7 @@ class QMIX:
             os.makedirs(self.model_dir)
         torch.save(self.eval_qmix_net.state_dict(),
                    self.model_dir + str(i) + '_' + num + '_qmix_net_params.pkl')
-        torch.save(self.eval_rnn.state_dict(),  self.model_dir +
-                   + str(i) + '_' + num + '_rnn_net_params.pkl')
+        torch.save(self.eval_rnn.state_dict(),  self.model_dir + str(i) + '_' + num + '_rnn_net_params.pkl')
 
     def save_final_model(self, i):
         if not os.path.exists(self.model_dir):
